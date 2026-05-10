@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:5000
+@token = paste_jwt_token_here
+
+### Register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "full_name": "Test User",
+  "email": "test@example.com",
+  "password": "Test@1234"
+}
+
+### Verify OTP
+POST {{baseUrl}}/api/auth/verify-otp
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "otp_code": "123456"
+}
+
+### Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Test@1234"
+}
+
+### Resend OTP
+POST {{baseUrl}}/api/auth/resend-otp
+Content-Type: application/json
+
+{
+  "email": "test@example.com"
+}
+
+### Get Me
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}

@@ -1,0 +1,58 @@
+@token = paste_your_jwt_here_after_login
+
+### Health Check
+GET http://localhost:5000/health
+
+### Stock Explorer - Price History
+GET http://localhost:5000/api/stock/history?ticker=AAPL&start=2023-01-01&end=2024-01-01
+
+### Stock Explorer - Stats
+GET http://localhost:5000/api/stock/stats?ticker=AAPL&start=2023-01-01&end=2024-01-01
+
+### Stock Explorer - Moving Averages
+GET http://localhost:5000/api/stock/moving-averages?ticker=MSFT&start=2022-01-01&end=2024-01-01
+
+### Stock Explorer - Best/Worst Month
+GET http://localhost:5000/api/stock/best-worst-month?ticker=TSLA&start=2022-01-01&end=2024-01-01
+
+### Pattern Finder - Consecutive Green Days
+GET http://localhost:5000/api/patterns/green-days?minDays=5&lookbackDays=90
+
+### Pattern Finder - Volume Spike
+GET http://localhost:5000/api/patterns/volume-spike?multiplier=2.5&lookbackDays=60
+
+### Pattern Finder - MA Crossover
+GET http://localhost:5000/api/patterns/ma-crossover?shortMA=20&longMA=50&lookbackDays=90
+
+### Comparator - Indexed Growth
+GET http://localhost:5000/api/compare?tickers=AAPL,MSFT,SPY&start=2023-01-01&end=2024-01-01
+
+### Comparator - Correlation
+GET http://localhost:5000/api/compare/correlation?ticker1=AAPL&ticker2=MSFT&start=2023-01-01&end=2024-01-01
+
+### Screener - Filter Stocks
+GET http://localhost:5000/api/screener?sector=Technology&start=2023-01-01&end=2024-01-01&minVolume=1000000&minPrice=50&maxPrice=500&minGrowthPct=10
+
+### Screener - Sector Volatility
+GET http://localhost:5000/api/sectors/volatility?sector=Technology&start=2023-01-01&end=2024-01-01
+
+### Sectors List
+GET http://localhost:5000/api/sectors/list
+
+### AI Explainer (requires JWT)
+POST http://localhost:5000/api/ai/explain
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "featureType": "green-days",
+  "resultData": {
+    "count": 4,
+    "minDays": 5,
+    "lookback": 90,
+    "topResults": [
+      { "ticker": "NVDA", "streak_len": 8, "streak_end": "2024-01-15" },
+      { "ticker": "AAPL", "streak_len": 6, "streak_end": "2024-01-14" }
+    ]
+  }
+}
